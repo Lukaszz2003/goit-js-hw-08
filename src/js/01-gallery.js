@@ -29,33 +29,6 @@ galleryItems.forEach(element => {
 
 gallery.append(...items);
 
-gallery.addEventListener('click', e => {
-  e.preventDefault();
-  if (e.target.nodeName !== 'IMG') {
-    return;
-  }
-
-  const selectedImage = e.target.getAttribute('data-source');
-
-  const instance = basicLightbox.create(
-    `
-    <img src="${selectedImage}" width="800" height="600">
-`,
-    {
-      onShow: instance => {
-        window.addEventListener('keydown', onEscKeyPress);
-      },
-      onClose: instance => {
-        window.removeEventListener('keydown', onEscKeyPress);
-      },
-    }
-  );
-  instance.show();
-  function onEscKeyPress(e) {
-    if (e.code === 'Escape') instance.close();
-  }
-});
-
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionPosition: 'bottom',
