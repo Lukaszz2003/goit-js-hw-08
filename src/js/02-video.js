@@ -11,12 +11,6 @@ player.on(
   }, 1000)
 );
 
-player
-  .setCurrentTime(localStorage.getItem('videoplayer-current-time'))
-  .catch(function (error) {
-    console.error(error);
-  });
-
 const load = key => {
   try {
     const serializedState = localStorage.getItem(key);
@@ -25,3 +19,8 @@ const load = key => {
     console.error('Get state error: ', error.message);
   }
 };
+
+const lsData = load('videoplayer-current-time');
+if (lsData) {
+  player.setCurrentTime(lsData);
+}
